@@ -8,11 +8,11 @@ var highScores = [];
 
 function getHighScores ()
 {
+  highScores = [];
   $.getJSON("http://localhost:3000/scores.json", function(data) {
     $.each(data, function(obj) {
     highScores.push( new Array( data[obj]['score'], data[obj]['name']));
     });
-    alert( highScores );
     populateHighScores( highScores );
   });
 }
@@ -30,6 +30,7 @@ function generateRandomNumber() {
 
 
 function populateHighScores( scores ) {
+  scores.sort(sortfunc);
   $('div#highScores').empty();
   for ( var i = 0; i < scores.length; ++i ) {
     $('div#highScores').append("<p>" + scores[i][0] + " " + scores[i][1] + "</p>");
@@ -61,8 +62,9 @@ function guessNumber() {
     var playerName = prompt("What is your name, weary wanderer?", "Schnoodles McDoo");
     if( playerName != null && playerName != "" )
     {
-      highScores.push([guessesLeft, playerName]);
-      highScores.sort(sortfunc);
+      //highScores.push([guessesLeft, playerName]);
+
+      sendScore( guessesLeft, playerName );
       getHighScores();
     }
     giveMessage("You survived...this time...<br/><a href=\"index.html\">Play again, wanderer?</a>\n");
@@ -84,4 +86,10 @@ function guessNumber() {
     updateScore( guessesLeft );
   }
 	
+}
+
+function sendScore ( playerScore, playerName ) {
+  //var json = { name:playerName, score:playerScore };
+  //var obj = JSON.parse(json);
+  $.post("http://localhost:3000/scores/create", { name:playerName, score:playerScore});
 }
