@@ -94,7 +94,6 @@ function sendScore ( playerScore, playerName ) {
   obj.score = playerScore;
 
   var json = JSON.stringify(obj);
-  alert(json);
 
   $.ajax({
     url: "/scores.json",
@@ -102,4 +101,6 @@ function sendScore ( playerScore, playerName ) {
     contentType: 'application/json',
     data: JSON.stringify(obj)
   });
+
+  
 }
