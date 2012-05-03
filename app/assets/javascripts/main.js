@@ -24,8 +24,7 @@ $(function() {
 });
 
 function generateRandomNumber() {
-  number = 1;
-	//number = Math.floor( Math.random()*100 + 1 );
+	number = Math.floor( Math.random()*100 + 1 );
 }
 
 
