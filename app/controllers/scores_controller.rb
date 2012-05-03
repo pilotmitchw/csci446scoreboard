@@ -46,6 +46,7 @@ class ScoresController < ApplicationController
   # POST /scores.json
   def create
     @score = Score.new(:score => params[:score], :name => params[:name])
+    
     respond_to do |format|
       if @score.save
         format.html { redirect_to @score, notice: 'Score was successfully created.' }
