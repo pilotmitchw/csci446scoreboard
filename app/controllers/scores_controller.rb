@@ -1,6 +1,11 @@
 class ScoresController < ApplicationController
+    respond_to :html, :json
+
+
+
   # GET /scores
   # GET /scores.json
+
   def index
     @scores = Score.all
 
@@ -40,8 +45,8 @@ class ScoresController < ApplicationController
   # POST /scores
   # POST /scores.json
   def create
-    @score = Score.new(params[:score])
-
+    @score = Score.new(:score => params[:score], :name => params[:name])
+    logger.info "params: #{params}\n\n"
     respond_to do |format|
       if @score.save
         format.html { redirect_to @score, notice: 'Score was successfully created.' }

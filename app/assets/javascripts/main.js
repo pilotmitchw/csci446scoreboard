@@ -24,7 +24,8 @@ $(function() {
 });
 
 function generateRandomNumber() {
-	number = Math.floor( Math.random()*100 + 1 );
+  number = 1;
+	//number = Math.floor( Math.random()*100 + 1 );
 }
 
 
@@ -67,7 +68,7 @@ function guessNumber() {
       sendScore( guessesLeft, playerName );
       getHighScores();
     }
-    giveMessage("You survived...this time...<br/><a href=\"index.html\">Play again, wanderer?</a>\n");
+    giveMessage("You survived...this time...<br/><a href=\"http:\/\/localhost:3000\">Play again, wanderer?</a>\n");
     return;
   } else if ( the_guess > number ) {
     giveMessage("Too High");
@@ -79,7 +80,7 @@ function guessNumber() {
 
   if ( guessesLeft <= 0 ) {
     updateScore(0);
-    giveMessage("You looz.<br/><a href=\"index.html\">Play again, wanderer?</a>\n");
+    giveMessage("You looz.<br/><a href=\"http:\/\/localhost:3000\">Play again, wanderer?</a>\n");
   }
   else
   {
@@ -89,7 +90,17 @@ function guessNumber() {
 }
 
 function sendScore ( playerScore, playerName ) {
-  //var json = { name:playerName, score:playerScore };
-  //var obj = JSON.parse(json);
-  $.post("http://localhost:3000/scores/create", { name:playerName, score:playerScore});
+  var obj = new Object();
+  obj.name = playerName;
+  obj.score = playerScore;
+
+  var json = JSON.stringify(obj);
+  alert(json);
+
+  $.ajax({
+    url: "/scores.json",
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(obj)
+  });
 }
