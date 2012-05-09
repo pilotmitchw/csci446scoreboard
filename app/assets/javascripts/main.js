@@ -67,7 +67,7 @@ function guessNumber() {
       sendScore( guessesLeft, playerName );
       getHighScores();
     }
-    giveMessage("You survived...this time...<br/><a href=\"http://furious-night-5005.herokuapp.com/">Play again, wanderer?</a>\n");
+    giveMessage("You survived...this time...<br/><a href=\"http://furious-night-5005.herokuapp.com/\">Play again, wanderer?</a>\n");
     return;
   } else if ( the_guess > number ) {
     giveMessage("Too High");
@@ -79,7 +79,7 @@ function guessNumber() {
 
   if ( guessesLeft <= 0 ) {
     updateScore(0);
-    giveMessage("You looz.<br/><a href=\"http://furious-night-5005.herokuapp.com/">Play again, wanderer?</a>\n");
+    giveMessage("You looz.<br/><a href=\"http://furious-night-5005.herokuapp.com/\">Play again, wanderer?</a>\n");
   }
   else
   {
